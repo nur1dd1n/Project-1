@@ -1,0 +1,1 @@
+#brut force, dictionary attacks, common password attacks checking 
