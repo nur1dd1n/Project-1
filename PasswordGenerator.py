@@ -1,5 +1,6 @@
 import secrets
 import string
+import random
 
 max_length = 16
 min_length = 4
@@ -22,6 +23,7 @@ def password_length():
 def yes_no_check(question):
      while True:
          answer = input(question).lower()
+
          if answer == "yes":
             return True
          elif answer == "no":         
@@ -30,13 +32,14 @@ def yes_no_check(question):
 
 
 def password_options():
-    use_uppercase = yes_no_check("Use Uppercase? (Yes/No): ")
-    use_digits = yes_no_check("Use Digits? (Yes/No): ")
-    use_symbols = yes_no_check("Use Symbols? (Yes/No): ")
-    use_lowercase = yes_no_check("Use Lowercase? (Yes/No): ")
-
     while True:
-        characters = " "
+        use_uppercase = yes_no_check("Use Uppercase? (Yes/No): ")
+        use_digits = yes_no_check("Use Digits? (Yes/No): ")
+        use_symbols = yes_no_check("Use Symbols? (Yes/No): ")
+        use_lowercase = yes_no_check("Use Lowercase? (Yes/No): ")
+
+        characters = ""
+
         if use_lowercase:
             characters += string.ascii_lowercase
         if use_uppercase:
@@ -45,26 +48,69 @@ def password_options():
             characters += string.digits
         if use_symbols:
             characters += string.punctuation
-        if characters == " ":
-            print("You must select at least one chracter type.")
 
-            return characters
+        if characters:
+            return (characters, use_symbols, use_digits, use_uppercase, use_lowercase)
+        
+        print("Choose at least one option.")
+
         
 
-def generate_password(length, characters): 
+def generate_password(
+        length,
+        characters,
+        use_symbols,
+        use_digits,
+        use_uppercase,
+        use_lowercase
+    ): 
 
-    password = " "
+    required = 0
 
-    for _ in range(length):
-        password += secrets.choice(characters)
+    #password = "" 
+    password = []
+
+    if use_uppercase:
+        password.append(secrets.choice(string.ascii_uppercase))
+    if use_lowercase:
+        password.append(secrets.choice(string.ascii_lowercase))
+    if use_digits:
+        password.append(secrets.choice(string.digits))
+    if use_symbols:
+        password.append(secrets.choice(string.punctuation))
+
+    if use_symbols:
+        required += 1
+    if use_digits:
+        required += 1
+    if use_uppercase:
+        required += 1
+    if use_lowercase:
+        required += 1
+
+    remaining = length - required
+
+    for _ in range(remaining):
+        password.append(secrets.choice(characters))
+
+    random.shuffle(password)
+
+    password = "".join(password)
 
     return password
 
 
 def main():
     length = password_length()
-    options = password_options()
-    password = generate_password(length, options)
+    characters, use_symbols, use_digits, use_uppercase, use_lowercase = password_options()
+    password = generate_password(
+        length, 
+        characters,
+        use_symbols,
+        use_digits,
+        use_uppercase,
+        use_lowercase,
+        )
 
     print('Your password:', password)
 
