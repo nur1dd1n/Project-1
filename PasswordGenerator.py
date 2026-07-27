@@ -72,21 +72,17 @@ def generate_password(
 
     if use_uppercase:
         password.append(secrets.choice(string.ascii_uppercase))
+        required += 1
     if use_lowercase:
         password.append(secrets.choice(string.ascii_lowercase))
+        required += 1
     if use_digits:
         password.append(secrets.choice(string.digits))
+        required += 1
     if use_symbols:
         password.append(secrets.choice(string.punctuation))
+        required += 1
 
-    if use_symbols:
-        required += 1
-    if use_digits:
-        required += 1
-    if use_uppercase:
-        required += 1
-    if use_lowercase:
-        required += 1
 
     remaining = length - required
 
@@ -115,7 +111,4 @@ def main():
     print('Your password:', password)
 
 main()
-#length = password_length()
-#password = generate_password(length)
-#print(password)
 
