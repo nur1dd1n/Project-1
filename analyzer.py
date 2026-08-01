@@ -86,4 +86,3 @@ def analyze_password():
     print(f"Symbols {symbols_count}")
 
 analyze_password()
-

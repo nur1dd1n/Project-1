@@ -111,4 +111,3 @@ def main():
     print('Your password:', password)
 
 main()
-
