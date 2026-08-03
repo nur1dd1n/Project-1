@@ -26,8 +26,8 @@ def analyze_password():
         if count > 1:
             print(f"'{char}' repeats {count} times")
             found  = True
-        if not found:
-            print("No repeated lowercase letters.")
+    if not found:
+        print("No repeated lowercase letters.")
 
     # Block for Upppercase repeats
     for char in password:
@@ -39,8 +39,8 @@ def analyze_password():
         if count > 1:
             print(f"'{char}' repeats {count} times")
             found = True
-        if not found:
-            print("No repeated uppercase letters.")
+    if not found:
+        print("No repeated uppercase letters.")
 
     # Block for Digits repeats
     for char in password:
@@ -52,8 +52,8 @@ def analyze_password():
         if count > 1:
             print(f"'{char}' repeats {count} times")
             found = True
-        if not found:
-            print("No repeated Digits.")
+    if not found:
+        print("No repeated Digits.")
 
     # Block for Symbols repeats
     for char in password:
@@ -65,8 +65,8 @@ def analyze_password():
         if count > 1:
             print(f"'{char}' repeats {count} times")
             found = True 
-        if not found:
-            print("No repeated symbols.")
+    if not found:
+        print("No repeated symbols.")
 
     for char in password:
         if char in string.ascii_lowercase:
